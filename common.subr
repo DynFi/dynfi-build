@@ -1,6 +1,6 @@
 export DYNFIWRKDIR="."
 export SRCCONF=${DYNFIWRKDIR}/dynfi-src.conf
-export MAKEOBJDIRPREFIX=${DYNFIWRKDIR}/obj
+export MAKEOBJDIRPREFIX=`realpath ${DYNFIWRKDIR}/obj`
 export KERNCONF=DYNFI
 
 NCPUS=$(sysctl -n hw.ncpu)
