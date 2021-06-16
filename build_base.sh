@@ -66,7 +66,7 @@ build_base()
     echo ""
     echo "Syncing packages"
     echo ""
-    rsync -avz -e "ssh -i /home/builder/.ssh/pkg-sync-sshkey" --progress /usr/home/builder/freebsd-base-repo/dynfi-13/FreeBSD:13:amd64 pkg@192.168.230.10:/var/www/html/base/
+    rsync -avz -e "ssh -i $HOME/.ssh/pkg-sync-sshkey" --progress ${DYNFI_REPO}/FreeBSD:13:amd64 pkg@192.168.230.10:/var/www/html/base/
 }
 
 while [ $# -ne 0 ]; do
