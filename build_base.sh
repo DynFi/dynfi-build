@@ -99,6 +99,6 @@ date=$(date "+%Y%m%d-%H%M%S")
 
 mkdir -p /tmp/builder_logs_${date}
 
-build_base 2>&1 | tee -a /tmp/builder_logs_${date}/build_freebsd.log
+build_base 2>&1 | tee -a /tmp/builder_logs_${USER}_${date}/build_freebsd.log
 
 rm /tmp/build-dynfi.pid
