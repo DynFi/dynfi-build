@@ -1,7 +1,8 @@
 #!/bin/sh
 
-export SRCCONF=/home/builder/dynfi-src.conf
-export MAKEOBJDIRPREFIX=/home/builder/freebsd-obj
+export DYNFIWRKDIR="."
+export SRCCONF=${DYNFIWRKDIR}/dynfi-src.conf
+export MAKEOBJDIRPREFIX=${DYNFIWRKDIR}/obj
 export KERNCONF=DYNFI
 
 CLEAN=n
@@ -9,9 +10,9 @@ RELEASE=n
 
 NCPUS=$(sysctl -n hw.ncpu)
 
-FBSD_TREE=/home/builder/freebsd
+FBSD_TREE=${DYNFIWRKDIR}/freebsd
 FBSD_BRANCH=dynfi-13
-DYNFI_REPO=/home/builder/freebsd-base-repo/${FBSD_BRANCH}
+DYNFI_REPO=${DYNFIWRKDIR}/freebsd-base-repo/${FBSD_BRANCH}
 
 usage()
 {
