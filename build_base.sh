@@ -1,22 +1,9 @@
 #!/bin/sh
 
-export DYNFIWRKDIR="."
-export SRCCONF=${DYNFIWRKDIR}/dynfi-src.conf
-export MAKEOBJDIRPREFIX=${DYNFIWRKDIR}/obj
-export KERNCONF=DYNFI
+. common.subr
 
 CLEAN=n
 RELEASE=n
-
-NCPUS=$(sysctl -n hw.ncpu)
-
-FBSD_TREE=${DYNFIWRKDIR}/freebsd
-FBSD_BRANCH=dynfi-13
-DYNFI_REPO=${DYNFIWRKDIR}/freebsd-base-repo/${FBSD_BRANCH}
-
-date=$(date "+%Y%m%d-%H%M%S")
-LOGS_DIR=/tmp/builder_logs_${USER}_${date}
-PID_FILE=/tmp/build-${USER}-dynfi.pid
 
 usage()
 {
@@ -34,7 +21,7 @@ EOF
 error()
 {
     echo "$1"
-    rm /tmp/build-dynfi.pid
+    rm ${PID_FILE}
     exit 1
 }
 

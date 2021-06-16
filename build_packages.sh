@@ -2,18 +2,13 @@
 
 CLEAN=n
 
+. common.subr
 
 # Either empty or -c for a clean bulk
 PORT_BULK=
-PORT_BRANCH=default
-FBSD_BRANCH=dynfi-13
 OVERLAY_PORTS=dynfi-overlay
 
 PORT_LIST="dynfi/opnsense-core lang/python3 net/aquantia-atlantic-kmod www/phalcon security/autossh"
-
-date=$(date "+%Y%m%d-%H%M%S")
-LOGS_DIR=/tmp/builder_logs_${USER}_${date}
-PID_FILE=/tmp/build-${USER}-dynfi.pid
 
 usage()
 {

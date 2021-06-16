@@ -1,14 +1,7 @@
 #!/bin/sh
 
-export SRCCONF=/home/builder/dynfi-src.conf
-export MAKEOBJDIRPREFIX=/home/builder/freebsd-obj
-export KERNCONF=DYNFI
+. common.subr
 
-NCPUS=$(sysctl -n hw.ncpu)
-
-FBSD_TREE=/home/builder/freebsd
-FBSD_BRANCH=dynfi-13
-PORT_BRANCH=default
 DFF_VERSION=$(readlink /usr/home/builder/freebsd-base-repo/${FBSD_BRANCH}/FreeBSD:13:amd64/latest)
 
 IMAGE_TARGET=disc1.iso
@@ -50,17 +43,14 @@ build_installer()
     scp ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256
 }
 
-if [ -f /tmp/build-dynfi.pid ]; then
+if [ -f ${PID_FILE} ]; then
     echo "A build is already in progress"
     exit 1
 fi
-echo $$ > /tmp/build-dynfi.pid
+echo $$ > ${PID_FILE}
 
-#date=$(date "+%Y%m%d-%H%M%S")
-date=$(date "+%Y%m%d-%H%M")
+mkdir -p ${LOGS_DIR}
 
-mkdir -p /tmp/builder_logs_${date}
+build_installer 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
 
-build_installer 2>&1 | tee -a /tmp/builder_logs_${date}/build_installer.log
-
-rm /tmp/build-dynfi.pid
+rm ${PID_FILE}
