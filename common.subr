@@ -5,7 +5,7 @@ export KERNCONF=DYNFI
 
 NCPUS=$(sysctl -n hw.ncpu)
 
-FBSD_TREE=/home/builder/freebsd
+FBSD_TREE=${DYNFIWRKDIR}/freebsd
 FBSD_BRANCH=dynfi-13
 PORT_BRANCH=default
 
