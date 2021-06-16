@@ -14,6 +14,10 @@ FBSD_TREE=${DYNFIWRKDIR}/freebsd
 FBSD_BRANCH=dynfi-13
 DYNFI_REPO=${DYNFIWRKDIR}/freebsd-base-repo/${FBSD_BRANCH}
 
+date=$(date "+%Y%m%d-%H%M%S")
+LOGS_DIR=/tmp/builder_logs_${USER}_${date}
+PID_FILE=/tmp/build-${USER}-dynfi.pid
+
 usage()
 {
     cat <<EOF
@@ -89,16 +93,13 @@ while [ $# -ne 0 ]; do
     shift
 done
 
-if [ -f /tmp/build-dynfi.pid ]; then
+
+if [ -f ${PID_FILE} ]; then
     echo "A build is already in progress"
     exit 1
 fi
-echo $$ > /tmp/build-dynfi.pid
+echo $$ > ${PID_FILE}
 
-date=$(date "+%Y%m%d-%H%M%S")
-
-mkdir -p /tmp/builder_logs_${date}
-
-build_base 2>&1 | tee -a /tmp/builder_logs_${USER}_${date}/build_freebsd.log
-
-rm /tmp/build-dynfi.pid
+mkdir -p ${LOGS_DIR}
+build_base 2>&1 | tee -a ${LOGS_DIR}/build_freebsd.log
+rm ${PID_FILE}
