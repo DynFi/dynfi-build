@@ -1,6 +1,8 @@
 #/bin/sh
 
-git -C /home/builder/freebsd-ports pull
+. common.sh
+
+git -C ${DYNFIWRKDIR}/freebsd-ports pull
 
 rm -r dynfi-overlay/dynfi/opnsense-core
 rm -r dynfi-overlay/dynfi/opnsense-update
