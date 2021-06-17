@@ -4,6 +4,7 @@
 
 CLEAN=n
 RELEASE=n
+CLEAN_FLAG=-DNO_CLEAN
 
 usage()
 {
@@ -42,8 +43,8 @@ build_base()
     echo ""
     echo "Building world and kernel"
     echo ""
-    make -s buildworld -j${NCPUS} || error "make buildworld failed"
-    make -s buildkernel -j${NCPUS} || error "make buildkernel failed"
+    make -s buildworld -j${NCPUS} ${CLEAN_FLAG} || error "make buildworld failed"
+    make -s buildkernel -j${NCPUS} ${CLEAN_FLAG} || error "make buildkernel failed"
 
     echo ""
     echo "Building packages"
@@ -64,6 +65,7 @@ while [ $# -ne 0 ]; do
     case "$1" in
 	-c)
 	    CLEAN=y
+	    CLEAN_FLAG=
 	    ;;
 	-r)
 	    RELEASE=y
