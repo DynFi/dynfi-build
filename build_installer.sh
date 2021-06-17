@@ -2,7 +2,7 @@
 
 . common.subr
 
-DFF_VERSION=$(readlink /usr/home/builder/freebsd-base-repo/${FBSD_BRANCH}/FreeBSD:13:amd64/latest)
+DFF_VERSION=$(readlin ${DYNFIWRKDIR}/FreeBSD:13:amd64/latest)
 
 IMAGE_TARGET=disc1.iso
 IMAGE_NAME=disc1.iso

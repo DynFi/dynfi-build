@@ -9,7 +9,7 @@ FBSD_TREE=${DYNFIWRKDIR}/freebsd
 FBSD_BRANCH=dynfi-13-stable
 PORT_BRANCH=default
 
-DYNFI_REPO=${DYNFIWRKDIR}/freebsd-base-repo/${FBSD_BRANCH}
+DYNFI_REPO="`realpath ${DYNFIWRKDIR}`/freebsd-base-repo/${FBSD_BRANCH}"
 
 date=$(date "+%Y%m%d-%H%M%S")
 LOGS_DIR=/tmp/builder_logs_${USER}_${date}
