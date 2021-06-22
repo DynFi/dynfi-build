@@ -1,6 +1,6 @@
 #/bin/sh
 
-. common.sh
+. common.subr
 
 git -C ${DYNFIWRKDIR}/freebsd-ports pull
 
