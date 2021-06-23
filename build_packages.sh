@@ -15,7 +15,7 @@ usage()
     cat <<EOF
 Usage: `basename $0` [options]
 Options:
-	-b	Git branch for the jail (default: dynfi-13)
+	-b	Git branch for the jail (default: dynfi-13-stable)
 	-o	Ports tree to use for the overlays (default: dynfi-overlay)
 	-p	Git branch for the portstree (default: default)
 	-c	Recreate the jail
