@@ -38,8 +38,8 @@ build_jail()
 	echo ""
 	echo "Building the poudriere jail"
 	echo ""
-	yes | sudo poudriere jail -d -j ${FBSD_BRANCH}
-	sudo poudriere jail -c -j ${FBSD_BRANCH} -m git -U http://192.168.99.219/gitmob/freebsd/ -v ${FBSD_BRANCH} || error "Poudriere: jail compile failed"
+	yes | sudo -E poudriere jail -d -j ${FBSD_BRANCH}
+	sudo -E poudriere jail -c -j ${FBSD_BRANCH} -m git -U http://192.168.99.219/gitmob/freebsd/ -v ${FBSD_BRANCH} || error "Poudriere: jail compile failed"
     fi
 }
 
@@ -48,12 +48,13 @@ build_packages()
     echo ""
     echo "Updating the ports tree"
     echo ""
-    sudo poudriere ports -u -p ${PORT_BRANCH} || error "Poudriere: ports update failed"
+    sudo -E poudriere ports -u -p ${PORT_BRANCH} || error "Poudriere: ports update failed"
 
     echo ""
     echo "Building the packages using branch ${PORT_BRANCH}"
     echo ""
-    sudo poudriere bulk ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} ${PORT_LIST} || error "Poudriere: bulk failed"
+
+    sudo -E poudriere bulk ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} ${PORT_LIST} || error "Poudriere: bulk failed"
 }
 
 while [ $# -ne 0 ]; do
