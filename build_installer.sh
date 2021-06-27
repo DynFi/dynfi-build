@@ -2,34 +2,37 @@
 
 . common.subr
 
-DFF_VERSION=$(readlin ${DYNFIWRKDIR}/FreeBSD:13:amd64/latest)
+DFF_VERSION=$(readlink ${DYNFIWRKDIR}/FreeBSD:13:amd64/latest)
 
 IMAGE_TARGET=disc1.iso
 IMAGE_NAME=disc1.iso
 IMAGE_EXT=.iso
 
-DYNFI_REPO=/home/builder/freebsd-base-repo/${FBSD_BRANCH}
+POUDRIERE_DIR=`realpath poudriere-conf`
+DYNFI_REPO=`realpath freebsd-base-repo/${FBSD_BRANCH}`
+
+RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
 
 build_installer()
 {
-    sudo chflags -R noschg ${MAKEOBJDIRPREFIX}/usr/home/builder/freebsd/amd64.amd64/release/
-    sudo rm -rf  ${MAKEOBJDIRPREFIX}/usr/home/builder/freebsd/amd64.amd64/release/
+    sudo chflags -R noschg ${RELEASE_DIR}
+    sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
 				    DYNFI_REPODIR=/usr/local/poudriere/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}/ \
-				    PORTSDIR=/usr/local/poudriere/ports/${PORT_BRANCH} \
+				    PORTSDIR=${POUDRIERE_DIR}/.. \
 				    WITH_SERIAL=yes
 
     mkdir -p ~/image/
-    cp ${MAKEOBJDIRPREFIX}/usr/home/builder/freebsd/amd64.amd64/release/${IMAGE_NAME} ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
+    cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
 
-    sudo chflags -R noschg ${MAKEOBJDIRPREFIX}/usr/home/builder/freebsd/amd64.amd64/release/
-    sudo rm -rf ${MAKEOBJDIRPREFIX}/usr/home/builder/freebsd/amd64.amd64/release/
+    sudo chflags -R noschg ${RELEASE_DIR}
+    sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
 				    DYNFI_REPODIR=/usr/local/poudriere/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}/ \
-				    PORTSDIR=/usr/local/poudriere/ports/${PORT_BRANCH}
+				    PORTSDIR=${POUDRIERE_DIR}/..
 
     mkdir -p ~/image/
-    cp ${MAKEOBJDIRPREFIX}/usr/home/builder/freebsd/amd64.amd64/release/${IMAGE_NAME} ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
+    cp ${RELEASE_DIR}/${IMAGE_NAME} ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
 
     bzip2 -v -9 ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
     bzip2 -v -9 ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
