@@ -20,7 +20,8 @@ build_installer()
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
 				    DYNFI_REPODIR=/usr/local/poudriere/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}/ \
 				    PORTSDIR=${POUDRIERE_DIR}/.. \
-				    WITH_SERIAL=yes
+				    WITH_SERIAL=yes \
+				    NODOC=
 
     mkdir -p ~/image/
     cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
@@ -29,7 +30,8 @@ build_installer()
     sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
 				    DYNFI_REPODIR=/usr/local/poudriere/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}/ \
-				    PORTSDIR=${POUDRIERE_DIR}/..
+				    PORTSDIR=${POUDRIERE_DIR}/.. \
+				    NODOC=
 
     mkdir -p ~/image/
     cp ${RELEASE_DIR}/${IMAGE_NAME} ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
