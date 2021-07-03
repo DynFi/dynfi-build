@@ -9,7 +9,6 @@ IMAGE_NAME=disc1.iso
 IMAGE_EXT=.iso
 
 POUDRIERE_DIR=`realpath poudriere-conf`
-DYNFI_REPO=`realpath freebsd-base-repo/${FBSD_BRANCH}`
 
 RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
 
