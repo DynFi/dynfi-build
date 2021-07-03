@@ -55,10 +55,6 @@ build_base()
 	make -s update-packages -j${NCPUS} REPODIR=${DYNFI_REPO} || error "make update-packages failed"
     fi
 
-    echo ""
-    echo "Syncing packages"
-    echo ""
-    rsync -avz -e "ssh -i $HOME/.ssh/pkg-sync-sshkey" --progress ${DYNFI_REPO}/FreeBSD:13:amd64 pkg@192.168.230.10:/var/www/html/base/
 }
 
 while [ $# -ne 0 ]; do
