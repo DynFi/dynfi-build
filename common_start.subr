@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cleanup() {
+	rm "${PID_FILE}" 2>&1
+}
+
+cleanup_exit() {
+	cleanup
+	exit 1
+}
+
+if [ -f ${PID_FILE} ]; then
+    echo "A build is already in progress"
+    exit 1
+fi
+echo $$ > ${PID_FILE}
+
+trap cleanup EXIT
+trap cleanup_exit INT

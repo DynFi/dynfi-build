@@ -1,6 +1,7 @@
 #!/bin/sh
 
 . common.subr
+. common_start.subr
 
 DFF_VERSION=$(readlink ${DYNFIWRKDIR}/FreeBSD:13:amd64/latest)
 
@@ -47,14 +48,6 @@ build_installer()
     scp ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256
 }
 
-if [ -f ${PID_FILE} ]; then
-    echo "A build is already in progress"
-    exit 1
-fi
-echo $$ > ${PID_FILE}
-
 mkdir -p ${LOGS_DIR}
 
 build_installer 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
-
-rm ${PID_FILE}

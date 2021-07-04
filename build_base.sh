@@ -22,7 +22,6 @@ EOF
 error()
 {
     echo "$1"
-    rm ${PID_FILE}
     exit 1
 }
 
@@ -78,13 +77,7 @@ while [ $# -ne 0 ]; do
     shift
 done
 
-
-if [ -f ${PID_FILE} ]; then
-    echo "A build is already in progress"
-    exit 1
-fi
-echo $$ > ${PID_FILE}
+. common_start.subr
 
 mkdir -p ${LOGS_DIR}
 build_base 2>&1 | tee -a ${LOGS_DIR}/build_freebsd.log
-rm ${PID_FILE}
