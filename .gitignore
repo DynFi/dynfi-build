@@ -1,0 +1,8 @@
+dynfi-overlay/
+freebsd-base-repo/
+freebsd-ports/
+freebsd/
+obj/
+poudriere-base/
+poudriere-conf/poudriere.d/jails/
+poudriere-conf/poudriere.d/ports/
