@@ -33,11 +33,11 @@ build_base()
 	echo ""
 	rm -rf ${FBSD_TREE}
 	git clone --depth=1 -b ${FBSD_BRANCH} ssh://git@192.168.99.219/freebsd.git ${FBSD_TREE}
-	cd ${FBSD_TREE}
     else
-	cd ${FBSD_TREE}
 	git pull
     fi
+
+    cd ${FBSD_TREE}
 
     echo ""
     echo "Building world and kernel"
