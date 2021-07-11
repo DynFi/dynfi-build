@@ -1,0 +1,5 @@
+dynfi/opnsense-core
+lang/python3
+net/aquantia-atlantic-kmod
+security/autossh
+www/phalcon

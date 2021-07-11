@@ -8,7 +8,7 @@ CLEAN=n
 PORT_BULK=
 OVERLAY_PORTS=dynfi-overlay
 
-PORT_LIST="dynfi/opnsense-core lang/python3 net/aquantia-atlantic-kmod www/phalcon security/autossh"
+PORTS_FILE="`realpath PORTS_LIST`"
 
 usage()
 {
@@ -54,7 +54,7 @@ build_packages()
     echo "Building the packages using branch ${PORT_BRANCH}"
     echo ""
 
-    sudo -E poudriere bulk ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} ${PORT_LIST} || error "Poudriere: bulk failed"
+    sudo -E poudriere bulk ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} -f "${PORTS_FILE}" || error "Poudriere: bulk failed"
 }
 
 while [ $# -ne 0 ]; do
