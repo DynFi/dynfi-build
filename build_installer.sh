@@ -9,7 +9,8 @@ IMAGE_TARGET=disc1.iso
 IMAGE_NAME=disc1.iso
 IMAGE_EXT=.iso
 
-POUDRIERE_DIR=`realpath poudriere-conf`
+POUDRIERE_DIR="`realpath freebsd-ports`"
+DYNFI_PKG_REPODIR="`realpath ${DYNFIWRKDIR}`/poudriere-base/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}"
 
 RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
 
@@ -18,8 +19,8 @@ build_installer()
     sudo chflags -R noschg ${RELEASE_DIR}
     sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
-				    DYNFI_REPODIR=/usr/local/poudriere/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}/ \
-				    PORTSDIR=${POUDRIERE_DIR}/.. \
+				    DYNFI_REPODIR=${DYNFI_PKG_REPODIR} \
+				    PORTSDIR=${PORTSDIR} \
 				    WITH_SERIAL=yes \
 				    NODOC=
 
@@ -29,8 +30,8 @@ build_installer()
     sudo chflags -R noschg ${RELEASE_DIR}
     sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
-				    DYNFI_REPODIR=/usr/local/poudriere/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}/ \
-				    PORTSDIR=${POUDRIERE_DIR}/.. \
+				    DYNFI_REPODIR=${DYNFI_PKG_REPODIR} \
+				    PORTSDIR=${PORTSDIR} \
 				    NODOC=
 
     mkdir -p ~/image/
