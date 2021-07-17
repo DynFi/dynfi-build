@@ -1,6 +1,13 @@
 audio/beep
 dynfi/opnsense-core
 lang/python3
+net-mgmt/net-snmp
+net-mgmt/zabbix-agent
 net/aquantia-atlantic-kmod
+net/frr7
+net/haproxy23
+net/ntopng
+net/wireguard
 security/autossh
+sysutils/lcdproc
 www/phalcon
