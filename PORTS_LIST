@@ -1,6 +1,9 @@
 audio/beep
+benchmarks/iperf3
+dns/bind916
 dynfi/opnsense-core
 lang/python3
+mail/rspamd
 net-mgmt/net-snmp
 net-mgmt/zabbix-agent
 net/aquantia-atlantic-kmod
