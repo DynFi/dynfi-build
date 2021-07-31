@@ -16,39 +16,30 @@ RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
 
 build_installer()
 {
-    sudo chflags -R noschg ${RELEASE_DIR}
-    sudo rm -rf ${RELEASE_DIR}
-    cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
-				    DYNFI_REPODIR=${DYNFI_PKG_REPODIR} \
-				    PORTSDIR=${PORTSDIR} \
-				    WITH_SERIAL=yes \
-				    NODOC=
-
-    mkdir -p ~/image/
-    cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
+    name="dynfi_installer_${1}_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}"
+    shift
+    opts="$@"
 
     sudo chflags -R noschg ${RELEASE_DIR}
     sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
+				    PKG_REPO_SIGNING_KEY=${DYNFI_SIGNKEY} \
 				    DYNFI_REPODIR=${DYNFI_PKG_REPODIR} \
 				    PORTSDIR=${PORTSDIR} \
-				    NODOC=
+				    NODOC= ${opts}
 
     mkdir -p ~/image/
-    cp ${RELEASE_DIR}/${IMAGE_NAME} ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
+    cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ~/image/${name}
 
-    bzip2 -v -9 ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
-    bzip2 -v -9 ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}
+    bzip2 -v -9 ~/image/${name}
 
-    cat ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2 | sha256 > ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256
-    cat ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2 | sha256 > ~/image/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256
+    cat ~/image/${name}.bz2 | sha256 > ~/image/${name}.bz2.sha256
 
-    scp ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2
-    scp ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2
-    scp ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256
-    scp ~/image/dynfi_installer_serial_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/dynfi_installer_vga_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}.bz2.sha256
+    scp ~/image/${name}.bz2 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
+    scp ~/image/${name}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
 }
 
 mkdir -p ${LOGS_DIR}
 
-build_installer 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
+build_installer serial "WITH_SERIAL=yes" 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
+build_installer vga 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
