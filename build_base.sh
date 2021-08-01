@@ -6,6 +6,8 @@ CLEAN=n
 RELEASE=n
 CLEAN_FLAG=-DNO_CLEAN
 
+export PKG_REPO_SIGNING_KEY="signing_command: sh `realpath ./sign.sh`"
+
 usage()
 {
     cat <<EOF

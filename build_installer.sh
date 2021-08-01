@@ -23,11 +23,9 @@ build_installer()
     sudo chflags -R noschg ${RELEASE_DIR}
     sudo rm -rf ${RELEASE_DIR}
     cd ${FBSD_TREE}/release && sudo -E make ${IMAGE_TARGET} WITH_PKGBASE=y REPODIR=${DYNFI_REPO} \
-				    PKG_REPO_SIGNING_KEY=${DYNFI_SIGNKEY} \
 				    DYNFI_REPODIR=${DYNFI_PKG_REPODIR} \
 				    PORTSDIR=${PORTSDIR} \
 				    NODOC= ${opts}
-
     mkdir -p ~/image/
     cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ~/image/${name}
 
