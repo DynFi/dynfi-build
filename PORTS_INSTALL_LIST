@@ -1,0 +1,7 @@
+audio/beep
+dynfi/opnsense-core
+lang/python3
+net/aquantia-atlantic-kmod
+ports-mgmt/pkg
+security/autossh
+www/phalcon

@@ -14,6 +14,16 @@ DYNFI_PKG_REPODIR="`realpath ${DYNFIWRKDIR}`/poudriere-base/data/packages/${FBSD
 
 RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
 
+PORTS_FILE="`realpath PORTS_INSTALL_LIST`"
+
+create_ports_list() {
+	sudo -E poudriere bulk -c -n ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} -f PORTS_INSTALL_LIST | \
+		grep 'Ports to build: ' | sed 's/.* Ports to build: //g' | tr ' ' '\n' | grep -v "^$" | \
+		sort | while read line; do
+			tar -xOf poudriere-base/data/packages/dynfi-13-stable-mariusz-dynfi-13-stable/packagesite.txz packagesite.yaml | jq -r "select(.origin==\"${line}\") | .path"
+	done
+}
+
 build_installer()
 {
     name="dynfi_installer_${1}_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}"
@@ -38,6 +48,12 @@ build_installer()
 }
 
 mkdir -p ${LOGS_DIR}
+
+export DYNFI_PORTS_LIST=`create_ports_list`
+if [ $? -ne 0 -o -z "${DYNFI_PORTS_LIST}" ]; then
+	echo "The ports list is empty."
+	exit 1
+fi
 
 build_installer serial "WITH_SERIAL=yes" 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
 build_installer vga 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
