@@ -1,5 +1,5 @@
 export DYNFIWRKDIR="."
-export SRCCONF=${DYNFIWRKDIR}/dynfi-src.conf
+export SRCCONF=`realpath ${DYNFIWRKDIR}/dynfi-src.conf`
 export MAKEOBJDIRPREFIX=`realpath ${DYNFIWRKDIR}/obj`
 export KERNCONF=DYNFI
 
