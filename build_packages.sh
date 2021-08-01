@@ -6,7 +6,6 @@ CLEAN=n
 
 # Either empty or -c for a clean bulk
 PORT_BULK=
-OVERLAY_PORTS=dynfi-overlay
 
 PORTS_FILE="`realpath PORTS_LIST`"
 

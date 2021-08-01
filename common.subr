@@ -8,6 +8,7 @@ NCPUS=$(sysctl -n hw.ncpu)
 FBSD_TREE=`realpath ${DYNFIWRKDIR}/freebsd`
 FBSD_BRANCH=dynfi-13-stable
 PORT_BRANCH=default
+OVERLAY_PORTS=dynfi-overlay
 
 DYNFI_REPO="`realpath ${DYNFIWRKDIR}`/freebsd-base-repo/${FBSD_BRANCH}"
 
