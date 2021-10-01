@@ -13,7 +13,7 @@ usage()
     cat <<EOF
 Usage: `basename $0` [options]
 Options:
-	-b	Git branch to use (default dynfi-13)
+	-b	Git branch to use (default dynfi-13-stable)
 	-c	Reclone the git repository
 	-r	Bootstrap a release (does make packages instead of update-packages)
 	-h	This help
