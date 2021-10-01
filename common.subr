@@ -9,6 +9,7 @@ FBSD_TREE=`realpath ${DYNFIWRKDIR}/freebsd`
 FBSD_BRANCH=dynfi-13-stable
 PORT_BRANCH=2021Q2
 OVERLAY_PORTS=dynfi-overlay
+IMAGE_DIR="`realpath ${DYNFIWRKDIR}/image/`"
 
 DYNFI_REPO="`realpath ${DYNFIWRKDIR}`/freebsd-base-repo/${FBSD_BRANCH}"
 

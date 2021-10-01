@@ -35,15 +35,15 @@ build_installer()
 				    DYNFI_REPODIR=${DYNFI_PKG_REPODIR} \
 				    PORTSDIR=${PORTSDIR} \
 				    NODOC= ${opts}
-    mkdir -p ~/image/
-    cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ~/image/${name}
+    mkdir -p ${IMAGE_DIR}/
+    cp ${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/${IMAGE_NAME} ${IMAGE_DIR}/${name}
 
-    bzip2 -v -9 ~/image/${name}
+    bzip2 -v -9 ${IMAGE_DIR}/${name}
 
-    cat ~/image/${name}.bz2 | sha256 > ~/image/${name}.bz2.sha256
+    cat ${IMAGE_DIR}/${name}.bz2 | sha256 > ${IMAGE_DIR}/${name}.bz2.sha256
 
-    scp ~/image/${name}.bz2 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
-    scp ~/image/${name}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
+    scp ${IMAGE_DIR}/${name}.bz2 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
+    scp ${IMAGE_DIR}/${name}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
 }
 
 mkdir -p ${LOGS_DIR}
