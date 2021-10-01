@@ -41,9 +41,6 @@ build_installer()
     bzip2 -v -9 ${IMAGE_DIR}/${name}
 
     cat ${IMAGE_DIR}/${name}.bz2 | sha256 > ${IMAGE_DIR}/${name}.bz2.sha256
-
-    scp ${IMAGE_DIR}/${name}.bz2 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
-    scp ${IMAGE_DIR}/${name}.bz2.sha256 publisher@dynfi.com:/var/www/dynfi/sites/default/files/dff/
 }
 
 mkdir -p ${LOGS_DIR}
