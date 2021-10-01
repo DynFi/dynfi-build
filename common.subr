@@ -1,6 +1,6 @@
 export DYNFIWRKDIR="."
-export SRCCONF=`realpath ${DYNFIWRKDIR}/dynfi-src.conf`
-export MAKEOBJDIRPREFIX=`realpath ${DYNFIWRKDIR}/obj`
+export SRCCONF="`realpath ${DYNFIWRKDIR}/dynfi-src.conf`"
+export MAKEOBJDIRPREFIX="`realpath ${DYNFIWRKDIR}/obj`"
 export KERNCONF=DYNFI
 
 NCPUS=$(sysctl -n hw.ncpu)
@@ -16,4 +16,4 @@ date=$(date "+%Y%m%d-%H%M%S")
 LOGS_DIR=/tmp/builder_logs_${USER}_${date}
 PID_FILE=/tmp/build-${USER}-dynfi.pid
 
-export POUDRIERE_ETC=`realpath poudriere-conf/`
+export POUDRIERE_ETC="`realpath poudriere-conf/`"

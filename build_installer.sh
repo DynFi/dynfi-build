@@ -9,7 +9,6 @@ IMAGE_TARGET=disc1.iso
 IMAGE_NAME=disc1.iso
 IMAGE_EXT=.iso
 
-POUDRIERE_DIR="`realpath freebsd-ports`"
 DYNFI_PKG_REPODIR="`realpath ${DYNFIWRKDIR}`/poudriere-base/data/packages/${FBSD_BRANCH}-${PORT_BRANCH}"
 
 RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
