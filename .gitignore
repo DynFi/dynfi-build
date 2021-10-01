@@ -1,8 +1,9 @@
-keys/
 dynfi-overlay/
 freebsd-base-repo/
 freebsd-ports/
 freebsd/
+image/
+keys/
 obj/
 poudriere-base/
 poudriere-conf/poudriere.d/jails/
