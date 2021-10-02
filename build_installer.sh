@@ -19,7 +19,7 @@ create_ports_list() {
 	sudo -E poudriere bulk -c -n ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} -f PORTS_INSTALL_LIST | \
 		grep 'Ports to build: ' | sed 's/.* Ports to build: //g' | tr ' ' '\n' | grep -v "^$" | \
 		sort | while read line; do
-			tar -xOf poudriere-base/data/packages/dynfi-13-stable-mariusz-dynfi-13-stable/packagesite.txz packagesite.yaml | jq -r "select(.origin==\"${line}\") | .path"
+			tar -xOf ${DYNFI_PKG_REPODIR}/packagesite.txz packagesite.yaml | jq -r "select(.origin==\"${line}\") | .path"
 	done
 }
 
