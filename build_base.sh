@@ -31,12 +31,11 @@ build_base()
 {
     if [ "${CLEAN}" == "y" ]; then
 	echo ""
-	echo "Cloning the FreeBSD source tree using branch ${FBSD_BRANCH}"
+	echo "Reseting the FreeBSD source tree using branch ${FBSD_BRANCH}"
 	echo ""
-	rm -rf ${FBSD_TREE}
-	git clone --depth=1 -b ${FBSD_BRANCH} ssh://git@192.168.99.219/freebsd.git ${FBSD_TREE}
-    else
-	git pull
+	git -C ${FBSD_TREE} clean -ffdx
+	git -C ${FBSD_TREE} checkout .
+	git -C ${FBSD_TREE} checkout -b "${FBSD_BRANCH}"
     fi
 
     cd ${FBSD_TREE}
