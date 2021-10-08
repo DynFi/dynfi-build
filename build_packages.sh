@@ -52,7 +52,6 @@ build_packages()
     echo ""
     echo "Building the packages using branch ${PORT_BRANCH}"
     echo ""
-
     sudo -E poudriere bulk ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} -f "${PORTS_FILE}" || error "Poudriere: bulk failed"
 }
 
