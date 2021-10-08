@@ -62,7 +62,12 @@ How to build the project
 - Next step is to build packages. The `build_packages.sh` script is responsible for that
 - When you have a package, kernel and world, you can build install with `build_installer.sh`
 - Finally, you can push the required repo to a remote server with the `build_sync.sh` script
- 
+
+Contribute
+==========
+
+Contribution are more then welcome.
+We always looking for additional tests, bug request or pull requests via GitHub.
  
 Licensing
 =========
