@@ -13,9 +13,9 @@ There are three supported options:
 - `-b` allows to change a FreeBSD branch (default: dynfi-13-stable)
  
 Useful variables in common.subr:
-- FBSD\_TREE - the FreeBSD repo
-- FBSD\_BRANCH - the default branch                
-- MAKEOBJDIRPREFIX - where to store obj file
+- `FBSD_TREE` - the FreeBSD repo
+- `FBSD_BRANCH` - the default branch                
+- `MAKEOBJDIRPREFIX` - where to store obj file
  
 build\_pacakges.sh
 ================= 
@@ -28,7 +28,7 @@ Supported options:
 - `-c` Recreate the jail 
  
 Useful variables in common.subr:
-- PORT\_BRANCH - the default port branch
+- `PORT_BRANCH` - the default port branch
  
 build\_installer.sh
 ==================
@@ -36,7 +36,7 @@ build\_installer.sh
 Script building the installer.
  
 Useful variables in common.subr:
-- IMAGE\_DIR - where to store build images
+- `IMAGE\_DIR` - where to store build images
                        
 poudriere.sh           
 ============
@@ -56,12 +56,12 @@ How to build the project
         - Dyn ports overlay 
 - Change configuration if you fetched the repos to a different place.
   The file you have to modify is common.subr, and interesting values are:
-        - OVERLAY\_PORTS - is a directory where the dynfi-overlay repo is
-        - FBSD\_TREE - is a directory where is FreeBSD dir
-- Next, you can use a build\_base.sh script to build FreeBSD kernel and world 
-- Next step is to build packages. The build\_packages.sh script is responsible for that
-- When you have a package, kernel and world, you can build install with build\_installer.sh
-- Finally, you can push the required repo to a remote server with the build\_sync.sh script
+        - `OVERLAY_PORTS` - is a directory where the dynfi-overlay repo is
+        - `FBSD_TREE` - is a directory where is FreeBSD dir
+- Next, you can use a `build_base.sh` script to build FreeBSD kernel and world 
+- Next step is to build packages. The `build_packages.sh` script is responsible for that
+- When you have a package, kernel and world, you can build install with `build_installer.sh`
+- Finally, you can push the required repo to a remote server with the `build_sync.sh` script
  
  
 Licensing
