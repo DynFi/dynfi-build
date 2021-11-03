@@ -38,7 +38,7 @@ build_jail()
 	echo "Building the poudriere jail"
 	echo ""
 	yes | sudo -E poudriere jail -d -j ${FBSD_BRANCH}
-	sudo -E poudriere jail -c -j ${FBSD_BRANCH} -m git -U http://192.168.99.219/gitmob/freebsd/ -v ${FBSD_BRANCH} || error "Poudriere: jail compile failed"
+	sudo -E poudriere jail -c -j ${FBSD_BRANCH} -b -m src="${FBSD_TREE}" -v ${FBSD_BRANCH} || error "Poudriere: jail compile failed"
     fi
 }
 
