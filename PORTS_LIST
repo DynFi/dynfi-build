@@ -1,16 +1,13 @@
-audio/beep
 benchmarks/iperf3
 dns/bind916
-dynfi/opnsense-core
 lang/python3
 mail/rspamd
 net-mgmt/net-snmp
 net-mgmt/zabbix-agent
-net/aquantia-atlantic-kmod
 net/frr7
 net/haproxy23
 net/ntopng
 net/wireguard
-security/autossh
 sysutils/lcdproc
 www/phalcon
+dynfi/dynfi

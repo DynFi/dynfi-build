@@ -13,10 +13,8 @@ DYNFI_PKG_REPODIR="`realpath ${DYNFIWRKDIR}`/poudriere-base/data/packages/${FBSD
 
 RELEASE_DIR=${MAKEOBJDIRPREFIX}/${FBSD_TREE}/amd64.amd64/release/
 
-PORTS_FILE="`realpath PORTS_INSTALL_LIST`"
-
 create_ports_list() {
-	sudo -E poudriere bulk -c -n ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} -f PORTS_INSTALL_LIST | \
+	sudo -E poudriere bulk -c -n ${PORT_BULK} -j ${FBSD_BRANCH} -p ${PORT_BRANCH} -O ${OVERLAY_PORTS} dynfi/dynfi lang/python3 | \
 		grep 'Ports to build: ' | sed 's/.* Ports to build: //g' | tr ' ' '\n' | grep -v "^$" | \
 		sort | while read line; do
 			tar -xOf ${DYNFI_PKG_REPODIR}/packagesite.txz packagesite.yaml | jq -r "select(.origin | (sub(\"/overlays/${OVERLAY_PORTS}/\"; \"\")) == \"${line}\") | .path"
