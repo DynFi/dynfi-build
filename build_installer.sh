@@ -21,9 +21,15 @@ create_ports_list() {
 	done
 }
 
+image_name()
+{
+
+    echo "dynfi_installer_${1}_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}"
+}
+
 build_installer()
 {
-    name="dynfi_installer_${1}_${DFF_VERSION}-${date}${IMAGE_SUFFIX}${IMAGE_EXT}"
+    name=`image_name ${1}`
     shift
     opts="$@"
 
@@ -49,5 +55,12 @@ if [ $? -ne 0 -o -z "${DYNFI_PORTS_LIST}" ]; then
 	exit 1
 fi
 
-build_installer serial "WITH_SERIAL=yes" 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
-build_installer vga 2>&1 | tee -a ${LOGS_DIR}/build_installer.log
+build_installer serial "WITH_SERIAL=yes" 2>&1 | tee -a ${LOGS_DIR}/build_installer.log || exit 1
+build_installer vga 2>&1 | tee -a ${LOGS_DIR}/build_installer.log || exit 1
+
+echo "========== BUILD FINISHED ==========="
+echo "Serial image:  `image_name serial`.bz2"
+echo "Serial sha256: `image_name serial`.bz2.sha256"
+echo "VGA image:     `image_name vga`.bz2"
+echo "VGA sha256:    `image_name vga`.bz2.sha256"
+echo "====================================="
