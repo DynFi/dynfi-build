@@ -3,7 +3,7 @@ dns/bind916
 lang/python3
 mail/rspamd
 net-mgmt/net-snmp
-net-mgmt/zabbix-agent
+net-mgmt/zabbix5-agent
 net/frr7
 net/haproxy23
 net/ntopng
