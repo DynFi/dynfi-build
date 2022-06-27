@@ -7,7 +7,7 @@ NCPUS=$(sysctl -n hw.ncpu)
 
 FBSD_TREE=`realpath ${DYNFIWRKDIR}/freebsd`
 FBSD_BRANCH=dynfi-13-stable
-PORT_BRANCH=2022Q1
+PORT_BRANCH=2022Q2
 OVERLAY_PORTS=dynfi-overlay
 IMAGE_DIR="`realpath ${DYNFIWRKDIR}/image/`"
 PUBLIC_SRV="pkg@192.168.230.10"
