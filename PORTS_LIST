@@ -1,5 +1,6 @@
 benchmarks/iperf3
 dns/bind916
+dns/ddns
 emulators/qemu-guest-agent
 emulators/virtualbox-ose-additions-nox11
 emulators/open-vm-tools@nox11
