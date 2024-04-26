@@ -3,7 +3,7 @@
 . common.subr
 . common_start.subr
 
-DFF_VERSION=$(readlink ${DYNFI_REPO}/FreeBSD:13:amd64/latest)
+DFF_VERSION=$(readlink ${DYNFI_REPO}/FreeBSD:14:amd64/latest)
 
 IMAGE_TARGET=disc1.iso
 IMAGE_NAME=disc1.iso
