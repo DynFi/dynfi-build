@@ -49,6 +49,10 @@ build_packages()
     echo ""
     sudo -E poudriere ports -u -p ${PORT_BRANCH} || error "Poudriere: ports update failed"
 
+    if [ -f "enterprise/build_enterprise.sh" ]; then
+	    ./enterprise/build_enterprise.sh
+    fi
+
     echo ""
     echo "Building the packages using branch ${PORT_BRANCH}"
     echo ""

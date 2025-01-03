@@ -13,6 +13,10 @@ echo "Syncing base"
 echo ""
 rsync -avz --progress ${DYNFI_REPO}/FreeBSD:14:amd64 ${PUBLIC_SRV}:/var/www/html/base/
 
+if [ -f "enterprise/sync_enterprise_prod.sh" ]; then
+	./enterprise/sync_enterprise_prod.sh
+fi
+
 echo ""
 echo "Syncing ports"
 echo ""
