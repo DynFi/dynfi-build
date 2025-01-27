@@ -3,19 +3,19 @@ export SRCCONF="`realpath ${DYNFIWRKDIR}/dynfi-src.conf`"
 export MAKEOBJDIRPREFIX="`realpath ${DYNFIWRKDIR}/obj`"
 export KERNCONF=DYNFI
 
-NCPUS=$(sysctl -n hw.ncpu)
+export NCPUS=$(sysctl -n hw.ncpu)
 
-FBSD_TREE=`realpath ${DYNFIWRKDIR}/freebsd`
-FBSD_BRANCH=dynfi-14-stable
-PORT_BRANCH=2024Q4
-OVERLAY_PORTS=dynfi-overlay
-IMAGE_DIR="`realpath ${DYNFIWRKDIR}/image/`"
-PUBLIC_SRV="pkg@192.168.230.10"
+export FBSD_TREE=`realpath ${DYNFIWRKDIR}/freebsd`
+export FBSD_BRANCH=dynfi-14-stable
+export PORT_BRANCH=2024Q4
+export OVERLAY_PORTS=dynfi-overlay
+export IMAGE_DIR="`realpath ${DYNFIWRKDIR}/image/`"
+export PUBLIC_SRV="pkg@192.168.230.10"
 
-DYNFI_REPO="`realpath ${DYNFIWRKDIR}`/freebsd-base-repo/${FBSD_BRANCH}"
+export DYNFI_REPO="`realpath ${DYNFIWRKDIR}`/freebsd-base-repo/${FBSD_BRANCH}"
 
-date=$(date "+%Y%m%d-%H%M%S")
-LOGS_DIR=/tmp/builder_logs_${USER}_${date}
-PID_FILE=/tmp/build-${USER}-dynfi.pid
+export date=$(date "+%Y%m%d-%H%M%S")
+export LOGS_DIR=/tmp/builder_logs_${USER}_${date}
+export PID_FILE=/tmp/build-${USER}-dynfi.pid
 
 export POUDRIERE_ETC="`realpath poudriere-conf/`"
