@@ -7,7 +7,7 @@ export NCPUS=$(sysctl -n hw.ncpu)
 
 export FBSD_TREE=`realpath ${DYNFIWRKDIR}/freebsd`
 export FBSD_BRANCH=dynfi-14-stable
-export PORT_BRANCH=2024Q4
+export PORT_BRANCH=2025Q1
 export OVERLAY_PORTS=dynfi-overlay
 export IMAGE_DIR="`realpath ${DYNFIWRKDIR}/image/`"
 export PUBLIC_SRV="pkg@192.168.230.10"
